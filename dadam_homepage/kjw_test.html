@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script>
+var slide_interval = 5000;		// 이미지 넘어가는 시간 간격
+var slide_effect_time = 2000;	// 이미지 효과(흐려짐) 지속시간
+var img_idx = 0;
+function main_slide_next(){
+	var img_arr = $('#main_slide_box').find('img');
+	if(img_idx==0){
+		img_idx = $(img_arr).length;
+	}
+	var cur_obj = $('#main_slide_box').find('img:visible');
+	var cur_idx = $(img_arr).index($(cur_obj));
+	next_idx = cur_idx+1;
+	if(next_idx >= img_idx){
+		next_idx = 0;
+	}
+	var next_obj = $(img_arr).get(next_idx);
+	$('#main_slide_box').css({background: 'url('+$(next_obj).attr('src')+') no-repeat'});
+	$(cur_obj).animate({
+		opacity: 0
+	},slide_effect_time,function(){
+		$(cur_obj).hide().css('opacity','100');
+		$(next_obj).show();
+	});
+}
+$(function(){
+	$('#main_slide_box').find('img').hide();
+	$('#main_slide_box').find('img:first').show();
+	var mn_sl_it = setInterval(main_slide_next, slide_interval);
+});
+	</script>
+</head>
+<body>
+	<table cellpadding=0 cellspacing=0 border=0 style="width: 1000px; height: 405px; margin-left: 12px;">
+		<tr>
+			<td id="main_slide_box" align="center">
+				<img border="0" src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo01.jpg" name="SlideShow">
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo02.jpg" name='SlideShow'>
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo03.jpg" name='SlideShow'>
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo04.jpg" name='SlideShow'>
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo05.jpg" name='SlideShow'>
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo06.jpg" name='SlideShow'>
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo07.jpg" name='SlideShow'>
+				<img border=0 src="http://www.anneline.co.kr/shop/data/skin/siesta_latte/img/main/main_photo08.jpg" name='SlideShow'>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
